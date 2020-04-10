@@ -1,4 +1,4 @@
-package pos.domain;
+package pos.domain.element;
 
 public class Table {
 

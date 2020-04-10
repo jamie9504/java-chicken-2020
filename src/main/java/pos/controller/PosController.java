@@ -1,10 +1,10 @@
 package pos.controller;
 
 import java.util.List;
-import pos.domain.Menu;
-import pos.domain.MenuRepository;
-import pos.domain.Table;
-import pos.domain.TableRepository;
+import pos.domain.element.Menu;
+import pos.domain.element.MenuRepository;
+import pos.domain.element.Table;
+import pos.domain.element.TableRepository;
 import pos.view.InputView;
 import pos.view.OutputView;
 

@@ -1,9 +1,8 @@
 package pos.view;
 
-import pos.domain.Menu;
-import pos.domain.Table;
-
 import java.util.List;
+import pos.domain.element.Menu;
+import pos.domain.element.Table;
 
 public class OutputView {
     private static final String TOP_LINE = "┌ ─ ┐";

@@ -1,4 +1,4 @@
-package pos.domain;
+package pos.domain.element;
 
 import java.util.ArrayList;
 import java.util.Collections;

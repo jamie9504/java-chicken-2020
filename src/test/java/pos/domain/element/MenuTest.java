@@ -1,4 +1,4 @@
-package pos.domain;
+package pos.domain.element;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
