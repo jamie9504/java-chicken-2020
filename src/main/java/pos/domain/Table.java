@@ -1,4 +1,4 @@
-package domain;
+package pos.domain;
 
 public class Table {
     private final int number;

@@ -1,4 +1,4 @@
-package view;
+package pos.view;
 
 import java.util.Scanner;
 

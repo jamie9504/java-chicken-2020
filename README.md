@@ -1,4 +1,4 @@
-# java-chicken-2020
+# java-pos-2020
 
 #### 기능 요구사항
 

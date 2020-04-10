@@ -1,7 +1,7 @@
-package view;
+package pos.view;
 
-import domain.Menu;
-import domain.Table;
+import pos.domain.Menu;
+import pos.domain.Table;
 
 import java.util.List;
 
