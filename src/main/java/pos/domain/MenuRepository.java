@@ -21,4 +21,11 @@ public class MenuRepository {
     public static List<Menu> menus() {
         return Collections.unmodifiableList(menus);
     }
+
+    public static Menu getMenu(int number) {
+        return menus().stream()
+            .filter(menu -> menu.sameNumber(number))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("메뉴 번호가 없습니다."));
+    }
 }
