@@ -1,11 +1,12 @@
 package pos.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import pos.domain.element.Menu;
 import pos.domain.element.Table;
 
@@ -22,7 +23,9 @@ public class PosStatus {
     }
 
     public List<Table> getTables() {
-        return Collections.unmodifiableList(new ArrayList<>(posStatus.keySet()));
+        return Collections.unmodifiableList(posStatus.keySet().stream()
+            .sorted(Comparator.comparingInt(Table::getNumber))
+            .collect(Collectors.toList()));
     }
 
     public Order getOrder(int tableNo) {
@@ -41,8 +44,30 @@ public class PosStatus {
             .orElseThrow(() -> new IllegalArgumentException("테이블 번호가 없습니다."));
     }
 
-    private boolean containsTable(int tableNo) {
+    public boolean containsTable(int tableNo) {
         return posStatus.keySet().stream()
             .anyMatch(table -> table.isSameNo(tableNo));
+    }
+
+    public boolean containsMenu(int menuNo, int tableNo) {
+        return posStatus.keySet().stream()
+            .filter(table -> table.isSameNo(tableNo))
+            .anyMatch(table -> posStatus.get(table).containsMenu(menuNo));
+    }
+
+    public boolean canAddMenuCount(int tableNo, int menuNo, int menuCount) {
+        return posStatus.get(getTable(tableNo)).canAddOrder(menuNo, menuCount);
+    }
+
+    public void addMoveCount(int tableNo, int menuNo, int menuCount) {
+        posStatus.get(getTable(tableNo)).addOrder(menuNo, menuCount);
+    }
+
+    public Price getPrice(int tableNo, PaymentType paymentType) {
+        return posStatus.get(getTable(tableNo)).getPrice(paymentType);
+    }
+
+    public void clearOrder(int tableNo, Order order) {
+        posStatus.put(getTable(tableNo), order);
     }
 }

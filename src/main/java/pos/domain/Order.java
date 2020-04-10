@@ -2,10 +2,12 @@ package pos.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import pos.domain.element.Menu;
 
 public class Order {
@@ -25,11 +27,26 @@ public class Order {
         return new Order(new ArrayList<>(order.keySet()));
     }
 
+    public boolean canAddOrder(int menuId, int count) {
+        return canAddOrder(getMenu(menuId), count);
+    }
+
     public boolean canAddOrder(Menu menu, int count) {
         if (!order.containsKey(menu) || count < 1) {
             return false;
         }
         return order.get(menu) + count < 100;
+    }
+
+    private Menu getMenu(int menuId) {
+        return order.keySet().stream()
+            .filter(menu -> menu.sameNumber(menuId))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("없는 MENU ID 입니다."));
+    }
+
+    public void addOrder(int menuId, int count) {
+        addOrder(getMenu(menuId), count);
     }
 
     public void addOrder(Menu menu, int count) {
@@ -47,6 +64,27 @@ public class Order {
     }
 
     public List<Menu> getMenus() {
-        return Collections.unmodifiableList(new ArrayList<>(order.keySet()));
+        return Collections.unmodifiableList(order.keySet().stream()
+            .sorted(Comparator.comparingInt(Menu::getNumber))
+            .collect(Collectors.toList()));
+    }
+
+    public int getCount(Menu menu) {
+        return order.get(menu);
+    }
+
+    public boolean containsMenu(int menuNo) {
+        return order.keySet().stream()
+            .anyMatch(menu -> menu.sameNumber(menuNo));
+    }
+
+    public Price getPrice(PaymentType paymentType) {
+        int sumPrice = order.keySet().stream()
+            .mapToInt(menu -> menu.getPrice() * order.get(menu))
+            .sum();
+        int sumChicken = (int) order.keySet().stream()
+            .filter(Menu::isChicken)
+            .count();
+        return new Price(sumPrice, sumChicken, paymentType);
     }
 }

@@ -21,4 +21,20 @@ public class Menu {
     public boolean sameNumber(int number) {
         return this.number == number;
     }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public boolean isChicken() {
+        return category == Category.CHICKEN;
+    }
 }

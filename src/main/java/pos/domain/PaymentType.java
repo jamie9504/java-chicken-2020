@@ -17,7 +17,7 @@ public enum PaymentType {
         this.discount = discount;
     }
 
-    public static boolean hasPaymentType(int number) {
+    public static boolean hasNumber(int number) {
         return Arrays.stream(PaymentType.values())
             .anyMatch(paymentType -> paymentType.number == number);
     }

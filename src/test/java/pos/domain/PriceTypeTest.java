@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class PaymentTypeTest {
+public class PriceTypeTest {
 
     @DisplayName("of 테스트")
     @Test
@@ -19,9 +19,9 @@ public class PaymentTypeTest {
 
     @DisplayName("hasPaymentType 테스트")
     @Test
-    public void hasPaymentType() {
-        assertThat(PaymentType.hasPaymentType(1)).isTrue();
-        assertThat(PaymentType.hasPaymentType(100)).isFalse();
+    public void hasNumber() {
+        assertThat(PaymentType.hasNumber(1)).isTrue();
+        assertThat(PaymentType.hasNumber(100)).isFalse();
     }
 
     @DisplayName("할인 잘 해주는지 테스트")

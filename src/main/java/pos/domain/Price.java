@@ -2,14 +2,14 @@ package pos.domain;
 
 import java.util.Objects;
 
-public class Payment {
+public class Price {
 
-    private final int payment;
+    private final int price;
 
-    public Payment(int sumPrice, int countChicken, PaymentType paymentType) {
+    public Price(int sumPrice, int countChicken, PaymentType paymentType) {
         Objects.requireNonNull(paymentType);
         validatePrices(sumPrice, countChicken);
-        this.payment = paymentType.getDiscountPrice(sumPrice - ((countChicken / 10) * 10000));
+        this.price = paymentType.getDiscountPrice(sumPrice - ((countChicken / 10) * 10000));
     }
 
     private void validatePrices(int sumPrice, int countChicken) {
@@ -18,7 +18,7 @@ public class Payment {
         }
     }
 
-    public int getPayment() {
-        return payment;
+    public int getPrice() {
+        return price;
     }
 }
