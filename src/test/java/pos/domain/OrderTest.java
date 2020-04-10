@@ -52,4 +52,14 @@ public class OrderTest {
             .hasMessageContaining("주문");
         order.addOrder(successMenu, successCount);
     }
+
+    @DisplayName("주문한 것이 1개라도 있는지 확인")
+    @Test
+    public void isOrdered() {
+        Menu menu = new Menu(1, "후라이드", Category.CHICKEN, 16_000);
+        Order order = new Order(Collections.singletonList(menu));
+        assertThat(order.isOrdered()).isFalse();
+        order.addOrder(menu, 1);
+        assertThat(order.isOrdered()).isTrue();
+    }
 }

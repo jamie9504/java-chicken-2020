@@ -17,4 +17,12 @@ public class PosStatus {
             posStatus.put(table, order.getOrderCopyMenu());
         }
     }
+
+    //public getMenus(int tableNo) {
+    //}
+
+    private boolean containsTable(int tableNo) {
+        return posStatus.keySet().stream()
+            .anyMatch(table -> table.isSameNo(tableNo));
+    }
 }

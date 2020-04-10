@@ -38,4 +38,10 @@ public class Order {
         }
         throw new IllegalArgumentException("주문을 할 수 없습니다.");
     }
+
+    public boolean isOrdered() {
+        return order.values().stream()
+            .mapToInt(count -> count)
+            .sum() > 0;
+    }
 }
