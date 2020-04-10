@@ -29,7 +29,10 @@ public class PosStatus {
     }
 
     public Order getOrder(int tableNo) {
-        Table table = getTable(tableNo);
+        return getOrder(getTable(tableNo));
+    }
+
+    public Order getOrder(Table table) {
         return posStatus.get(table);
     }
 

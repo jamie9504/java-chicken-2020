@@ -3,6 +3,7 @@ package pos.view;
 import java.util.List;
 import pos.domain.Order;
 import pos.domain.PosMenu;
+import pos.domain.PosStatus;
 import pos.domain.Price;
 import pos.domain.element.Menu;
 import pos.domain.element.Table;
@@ -10,16 +11,17 @@ import pos.domain.element.Table;
 public class OutputView {
 
     private static final String TOP_LINE = "┌ ─ ┐";
-    private static final String TABLE_FORMAT = "| %s |";
+    private static final String TABLE_FORMAT = "| %s \"└ ─ ┘\"|";
     private static final String BOTTOM_LINE = "└ ─ ┘";
 
-    public static void printTables(final List<Table> tables) {
+    public static void printTables(final PosStatus posStatus) {
         System.out.println();
         System.out.println("## 테이블 목록");
+        final List<Table> tables = posStatus.getTables();
         final int size = tables.size();
         printTopLine(size);
         printTableNumbers(tables);
-        printBOTTOMLine(size, tables);
+        printBOTTOMLine(size, posStatus, tables);
         System.out.println();
     }
 
@@ -37,8 +39,12 @@ public class OutputView {
         System.out.println();
     }
 
-    private static void printBOTTOMLine(final int count, List<Table> tables) {
-        for (int index = 0; index < count; index++) {
+    private static void printBOTTOMLine(final int count, PosStatus posStatus, List<Table> tables) {
+        for (final Table table : tables) {
+            if (posStatus.getOrder(table).isOrdered()) {
+                System.out.println("└ W ┘");
+                continue;
+            }
             System.out.print(BOTTOM_LINE);
         }
         System.out.println();
@@ -111,5 +117,9 @@ public class OutputView {
 
     public static void printNumberException() {
         System.out.println("숫자로 입력해주셔야 합니다.");
+    }
+
+    public static void printNoOrdered() {
+        System.out.println("주문 내역이 없습니다.");
     }
 }

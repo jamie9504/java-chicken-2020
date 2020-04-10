@@ -47,7 +47,7 @@ public class PosController {
     }
 
     private static void order(PosStatus posStatus) {
-        OutputView.printTables(posStatus.getTables());
+        OutputView.printTables(posStatus);
         int tableNo = getTableNo(posStatus);
         OutputView.printMenus(posStatus.getMenus(tableNo));
         int menuNo = getMenuNo(posStatus, tableNo);
@@ -55,8 +55,12 @@ public class PosController {
     }
 
     private static void payment(PosStatus posStatus) {
-        OutputView.printTables(posStatus.getTables());
+        OutputView.printTables(posStatus);
         int tableNo = getTableNo(posStatus);
+        if (!posStatus.getOrder(tableNo).isOrdered()) {
+            OutputView.printNoOrdered();
+            return;
+        }
         OutputView.printOrder(posStatus.getOrder(tableNo));
 
         PaymentType paymentType = getPaymentType(tableNo);
