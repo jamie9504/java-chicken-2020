@@ -42,7 +42,7 @@ public class OutputView {
     private static void printBOTTOMLine(final int count, PosStatus posStatus, List<Table> tables) {
         for (final Table table : tables) {
             if (posStatus.getOrder(table).isOrdered()) {
-                System.out.println("└ W ┘");
+                System.out.print("└ W ┘");
                 continue;
             }
             System.out.print(BOTTOM_LINE);
