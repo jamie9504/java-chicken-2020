@@ -23,4 +23,11 @@ public class PaymentTypeTest {
         assertThat(PaymentType.hasPaymentType(1)).isTrue();
         assertThat(PaymentType.hasPaymentType(100)).isFalse();
     }
+
+    @DisplayName("할인 잘 해주는지 테스트")
+    @Test
+    public void getDiscountPrice() {
+        assertThat(PaymentType.CARD.getDiscountPrice(10000)).isEqualTo(10000);
+        assertThat(PaymentType.CASH.getDiscountPrice(10000)).isEqualTo(9500);
+    }
 }
