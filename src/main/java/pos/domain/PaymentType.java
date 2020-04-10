@@ -32,4 +32,8 @@ public enum PaymentType {
     public String getName() {
         return name;
     }
+
+    public int getDiscountPrice(int price) {
+        return discount.apply(price);
+    }
 }
