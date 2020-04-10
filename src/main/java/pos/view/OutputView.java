@@ -11,7 +11,7 @@ import pos.domain.element.Table;
 public class OutputView {
 
     private static final String TOP_LINE = "┌ ─ ┐";
-    private static final String TABLE_FORMAT = "| %s \"└ ─ ┘\"|";
+    private static final String TABLE_FORMAT = "| %s |";
     private static final String BOTTOM_LINE = "└ ─ ┘";
 
     public static void printTables(final PosStatus posStatus) {
