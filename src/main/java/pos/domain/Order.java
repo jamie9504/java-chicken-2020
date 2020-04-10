@@ -1,6 +1,7 @@
 package pos.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class Order {
         }
     }
 
-    public Order getOrderCopyMenu() {
+    public Order getCopyMenuInstance() {
         return new Order(new ArrayList<>(order.keySet()));
     }
 
@@ -43,5 +44,9 @@ public class Order {
         return order.values().stream()
             .mapToInt(count -> count)
             .sum() > 0;
+    }
+
+    public List<Menu> getMenus() {
+        return Collections.unmodifiableList(new ArrayList<>(order.keySet()));
     }
 }
