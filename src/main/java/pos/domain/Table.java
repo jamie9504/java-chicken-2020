@@ -8,7 +8,6 @@ public class Table {
         this.number = number;
     }
 
-
     @Override
     public String toString() {
         return Integer.toString(number);
